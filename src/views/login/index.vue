@@ -7,18 +7,16 @@
       <!-- username -->
       <el-form-item>
       <span class="svg-container">
-        <el-icon>
-          <avatar />
-        </el-icon>
+
       </span>
         <el-input placeholder="username" name="username" type="text"></el-input>
       </el-form-item>
       <!-- password -->
       <el-form-item>
       <span class="svg-container">
-        <el-icon>
-          <avatar />
-        </el-icon>
+        <span class="svg-container">
+          <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
+        </span>
       </span>
         <el-input placeholder="password" name="password"></el-input>
         <span class="show-pwd">
@@ -28,13 +26,15 @@
       </span>
       </el-form-item>
       <!-- login button -->
-      <el-button type="primary" style="width: 100%;margin-bottom: 30px;" />
+      <el-button type="primary" style="width: 100%;margin-bottom: 30px;">登 录</el-button>
     </el-form>
   </div>
 </template>
 
 <script setup>
+// 导入的组件可以直接使用
 import { Avatar } from '@element-plus/icons'
+import SvgIcon from '@/components/SvgIcon'
 </script>
 
 <script>
