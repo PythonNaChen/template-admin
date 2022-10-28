@@ -44,8 +44,15 @@
           </span>
         </span>
       </el-form-item>
-      <!-- login button -->
-      <el-button type="primary" style="width: 100%;margin-bottom: 30px;">登 录</el-button>
+      <!-- 登录按钮 -->
+      <el-button
+        type="primary"
+        style="width: 100%;margin-bottom: 30px;"
+        :loading="loading"
+        @click="handlerLogin"
+      >
+        登 录
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -54,7 +61,9 @@
 // 导入的组件可以直接使用
 import SvgIcon from '@/components/SvgIcon'
 import { ref } from 'vue'
+// import { useStore } from 'vuex'
 import { validatePassword } from './rules'
+import { useStore } from 'vuex'
 
 // 数据源
 const loginForm = ref({
@@ -81,12 +90,38 @@ const loginRules = ref({
 
 // 处理密码框文本显示状态
 const passwordType = ref('password')
+// template 中绑定的方法，直接声明即可
 const onChangePwdType = () => {
   if (passwordType.value === 'password') {
     passwordType.value = 'text'
   } else {
     passwordType.value = 'password'
   }
+}
+
+// 处理登录
+const loading = ref(false)
+const store = useStore()
+const loginFromRef = ref(null) // 传入null的话，就回去匹配DOM实例
+
+// 1.进行表达校验
+const handlerLogin = () => {
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return
+    // 2.触发登陆动作
+
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then(() => {
+        loading.value = false
+        // TODO: 登录后操作
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  })
 }
 
 </script>
