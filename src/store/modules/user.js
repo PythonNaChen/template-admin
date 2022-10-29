@@ -20,13 +20,13 @@ export default {
     * */
     login (context, userInfo) {
       const { username, password } = userInfo
-      console.log('username, password', username, password)
       return new Promise((resolve, reject) => {
         login({
           username,
           password: md5(password)
         }).then(data => {
-          this.commit('user/setToken', data.data.data.token)
+          console.log('登录请求', data?.token)
+          this.commit('user/setToken', data?.token)
           resolve(data)
         }).catch(err => {
           reject(err)

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import md5 from 'md5'
+import { ElMessage } from 'element-plus'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -20,6 +21,25 @@ service.interceptors.request.use(
   }
 )
 
+// 响应拦截器
+service.interceptors.response.use(response => {
+  const { success, message, data } = response.data
+  // 判断请求是否成功
+  if (success) {
+    // 成功返回解析后的数据
+    return data
+  } else {
+    // 失败（请求成功，业务失败），消息提示
+    ElMessage.error(message)
+    return Promise.reject(new Error(message))
+  }
+},
+// 请求失败
+error => {
+  ElMessage.error(error.message)
+  return Promise.reject(new Error(error))
+})
+
 /**
  * 返回 Icode 的实现
  */
@@ -31,4 +51,5 @@ function getTestICode () {
     time: now
   }
 }
+
 export default service
