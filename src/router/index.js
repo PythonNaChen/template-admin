@@ -8,6 +8,11 @@ const publicRoutes = [
     path: '/login',
     name: 'LoginPage',
     component: () => import('@/views/login/index')
+  },
+  {
+    path: '/',
+    name: 'LayoutPage',
+    component: () => import('@/layout/index')
   }
   // {
   //   path: '/about',
