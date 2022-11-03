@@ -15,7 +15,7 @@ export default {
       setItem(TOKEN, token)
     },
     setUserInfo (state, userInfo) {
-      state.token = userInfo
+      state.userInfo = userInfo
     }
   },
   actions: {
@@ -42,6 +42,7 @@ export default {
      */
     async getUserInfo (context) {
       const res = await getUserInfo()
+      console.log(res)
       this.commit('user/setUserInfo', res)
       return res
     }
