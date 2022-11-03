@@ -1,11 +1,16 @@
 <template>
   <div class="app-wrapper">
     <!-- 左侧 menu -->
-    <Sidebar class="sidebar-container" />
+    <sidebar
+      id="guide-sidebar"
+      class="sidebar-container"
+      :style="{backgroundColor: variables.menuBg}"
+    />
     <div class="main-container">
       <div class="fixed-header">
-        <!-- 顶部 navbar -->
+        <!-- 顶部的 navbar -->
         <navbar />
+        <!-- tags -->
       </div>
       <!-- 内容区 -->
       <app-main />
@@ -17,6 +22,7 @@
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
+import variables from '@/styles/variables.module.scss'
 </script>
 
 <script>
@@ -27,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
-@import '~@/styles/variables.scss';
+@import '~@/styles/variables.module.scss';
 
 .app-wrapper {
   @include clearfix;
@@ -44,7 +50,6 @@ export default {
   width: calc(100% - #{$sideBarWidth});
   transition: width #{$sideBarDuration};
 }
-
 .fixed-header {
   position: fixed;
   top: 0;

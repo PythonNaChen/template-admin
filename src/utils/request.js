@@ -1,6 +1,7 @@
 import axios from 'axios'
 import md5 from 'md5'
 import { ElMessage } from 'element-plus'
+import store from '@/store'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -13,6 +14,12 @@ service.interceptors.request.use(
     const { icode, time } = getTestICode()
     config.headers.icode = icode
     config.headers.codeType = time
+
+    // 在这个位置需要统一的去注入token
+    if (store.getters.token) {
+      // 如果token存在 注入token
+      config.headers.Authorization = `Bearer ${store.getters.token}`
+    }
 
     return config // 必须返回配置
   },
