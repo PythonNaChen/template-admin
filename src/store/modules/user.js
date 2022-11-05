@@ -3,6 +3,7 @@ import md5 from 'md5'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
 
 export default {
   namespaced: true, // 这个模块是个单独的模块，不会被合并到主模块里
@@ -32,6 +33,8 @@ export default {
         }).then(data => {
           console.log('登录请求', data?.token)
           this.commit('user/setToken', data?.token)
+          // 保存登录时间
+          setTimeStamp()
           resolve(data)
         }).catch(err => {
           reject(err)

@@ -116,7 +116,6 @@ const handlerLogin = () => {
       .dispatch('user/login', loginForm.value)
       .then(() => {
         loading.value = false
-        // TODO: 登录后操作
         router.push('/')
       })
       .catch((err) => {
