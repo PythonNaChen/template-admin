@@ -11,6 +11,8 @@ const getters = {
   },
   // 获取用户信息
   userInfo: state => state.user.userInfo,
-  cssVar: (state) => variables
+  cssVar: _ => variables,
+  // 侧边栏开关
+  sidebarOpened: state => state.app.sidebarOpened
 }
 export default getters

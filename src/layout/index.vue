@@ -1,5 +1,8 @@
 <template>
-  <div class="app-wrapper">
+  <div
+    class="app-wrapper"
+    :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
+  >
     <!-- 左侧 menu -->
     <sidebar
       id="guide-sidebar"
@@ -42,6 +45,7 @@ export default {
   width: 100%;
 }
 
+/* 打开时的侧边栏宽度，以及动画效果 */
 .fixed-header {
   position: fixed;
   top: 0;
@@ -50,15 +54,8 @@ export default {
   width: calc(100% - #{$sideBarWidth});
   transition: width #{$sideBarDuration};
 }
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
-}
 
+/* 关闭时的侧边栏宽度 */
 .hideSidebar .fixed-header {
   width: calc(100% - #{$hideSideBarWidth});
 }
