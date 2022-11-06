@@ -1,4 +1,7 @@
 const path = require('path')
+// 在webpack5中移除了nodejs核心模块的polyfill自动引入，所以需要手动引入
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
@@ -32,5 +35,8 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
+  },
+  configureWebpack: {
+    plugins: [new NodePolyfillPlugin()]
   }
 }

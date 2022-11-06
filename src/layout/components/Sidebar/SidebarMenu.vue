@@ -23,6 +23,19 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { filterRouters, generateMenus } from '@/utils/route'
+
+const router = useRouter()
+// eslint-disable-next-line no-unused-vars
+const routes = computed(() => {
+  // 过滤完成后的路由数据
+  const filterRoutes = filterRouters(router.getRoutes())
+  // 解析出包含具体结构的路由数组
+  return generateMenus(filterRoutes)
+})
+console.log('routes', routes.value)
 </script>
 
 <script>
