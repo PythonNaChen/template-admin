@@ -1,3 +1,5 @@
+import variables from '@/styles/variables.module.scss'
+
 // 快捷访问
 const getters = {
   token: state => state.user.token,
@@ -8,6 +10,7 @@ const getters = {
     return JSON.stringify(state.user.userInfo) !== '{}'
   },
   // 获取用户信息
-  userInfo: state => state.user.userInfo
+  userInfo: state => state.user.userInfo,
+  cssVar: (state) => variables
 }
 export default getters

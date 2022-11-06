@@ -24,22 +24,18 @@
       <!-- password -->
       <el-form-item>
         <span class="svg-container">
-          <span class="svg-container">
-            <svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
-          </span>
+          <svg-icon icon="password" />
         </span>
-
         <el-input
           placeholder="password"
           name="password"
           v-model="loginForm.password"
           :type="passwordType"
         />
-        <span class="show-pwd">
+        <span class="show-pwd" @click="onChangePwdType">
           <span class="svg-container">
             <svg-icon
               :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
-              @click="onChangePwdType"
             />
           </span>
         </span>
@@ -93,6 +89,7 @@ const loginRules = ref({
 const passwordType = ref('password')
 // template 中绑定的方法，直接声明即可
 const onChangePwdType = () => {
+  console.log(213)
   if (passwordType.value === 'password') {
     passwordType.value = 'text'
   } else {
@@ -153,6 +150,9 @@ $cursor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
+    :deep .el-input__wrapper{
+      background-color: unset;
+    }
     :deep .el-form-item {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
