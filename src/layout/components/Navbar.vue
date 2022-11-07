@@ -5,31 +5,33 @@
     <!-- 面包屑 -->
     <Breadcrumb />
     <div class="right-menu">
-    <!-- 头像 -->
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <el-avatar
-          shape="square"
-          :size="40"
-          :src="$store.getters.userInfo.avatar"
-        ></el-avatar>
-        <i class="el-icon-s-tools"></i>
-      </div>
-      <template #dropdown>
-        <el-dropdown-menu class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>主页</el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="">
-            <el-dropdown-item>课程</el-dropdown-item>
-          </a>
-          <el-dropdown-item divided @click="logout()">
-            退出登录
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
-  </div>
+      <!-- 国际化 -->
+      <LangSelect class="right-menu-item" />
+      <!-- 头像 -->
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <el-avatar
+            shape="square"
+            :size="40"
+            :src="$store.getters.userInfo.avatar"
+          ></el-avatar>
+          <i class="el-icon-s-tools"></i>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu class="user-dropdown">
+            <router-link to="/">
+              <el-dropdown-item>主页</el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="">
+              <el-dropdown-item>课程</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click="logout()">
+              退出登录
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -37,6 +39,7 @@
 import { useStore } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
+import LangSelect from '@/components/LangSelect'
 
 const store = useStore()
 const logout = () => {
@@ -70,9 +73,11 @@ export default {
       background: rgba(0, 0, 0, 0.1);
     }
   }
+
   .breadcrumb-container {
     float: left;
   }
+
   .right-menu {
     display: flex;
     align-items: center;
@@ -81,15 +86,18 @@ export default {
 
     :deep .avatar-container {
       cursor: pointer;
+
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
+
         .el-avatar {
           --el-avatar-background-color: none;
           margin-right: 12px;
         }
       }
     }
+
     :deep .right-menu-item {
       display: inline-block;
       padding: 0 18px 0 0;
